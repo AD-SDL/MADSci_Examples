@@ -2,7 +2,6 @@
 
 ```mermaid
 stateDiagram
-  direction LR
   [*] --> Queued:Workflow Submitted
   Queued --> Running:Start Step
   Queued --> Failed:Error starting Step
