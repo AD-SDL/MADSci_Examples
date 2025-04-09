@@ -4,29 +4,25 @@
 stateDiagram
   direction LR
   [*] --> Queued:Workflow Submitted
-  Queued --> Running:Started First Step
-  Queued --> Failed:Problem starting First Step
-  Running --> InProgress:Succeeded Non-Terminal Step
-  InProgress --> Running:Started Next Step
-  Queued --> Cancelled:Cancelled by User
-  Running --> Cancelled:Cancelled by User
+  Queued --> Running:Start Step
+  Queued --> Failed:Error starting Step
+  Queued --> Cancelled:Cancelled
+  Running --> Cancelled:Cancelled
   Running --> Completed:Succeeded Final Step
-  Paused --> Running:Resumed by User
-  Running --> Paused:Paused by User
-  InProgress --> Paused:Paused by User
-  InProgress --> Cancelled:Cancelled by User
-  Failed --> InProgress:Retrying Step
-  Failed --> Queued:Resubmitted by User
-  Cancelled --> InProgress:Retrying Step
-  Cancelled --> Queued:Resubmitted by User
-  Completed --> Queued:Resubmitted by User
-  Queued --> Paused:Paused by User
-  Paused --> Queued:Resumed by User
+  Running --> Failed:Error during Step
+  Paused --> Running:Resumed
+  Running --> Paused:Paused
+  Failed --> Queued:Resubmitted/Retried
+  Cancelled --> Queued:Resubmitted/Retried
+  Queued --> Paused:Paused
+  Paused --> Queued:Resumed
+  Completed --> [*]
+  Cancelled --> [*]
+  Failed --> [*]
 
   Queued:queued
   Running:running
   Failed:failed
-  InProgress:in_progress
   Cancelled:cancelled
   Completed:completed
   Paused:paused
