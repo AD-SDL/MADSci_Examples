@@ -1,11 +1,11 @@
 [project]
 name = "MADSci_Examples"
 version = "0.1.0"
-description = "Default template for PDM package"
+description = "Examples for the Modular Autonomous Discovery for Science (MADSci) project."
 authors = [
     {name = "Ryan Lewis", email = "ryan.lewis@anl.gov"},
 ]
-dependencies = ["madsci-client>=0.1.9", "madsci-common>=0.1.9", "madsci-node-module>=0.1.9", "ipykernel>=6.29.5", "httpx>=0.28.1"]
+dependencies = ["madsci.client>=0.2.0", "madsci.common>=0.2.0", "madsci.node_module>=0.2.0", "ipykernel>=6.29.5", "httpx>=0.28.1"]
 requires-python = ">=3.9.1"
 readme = "README.md"
 license = {text = "MIT"}
