@@ -175,3 +175,10 @@ cython_debug/
 
 # Mac Nonsense
 .DS_Store
+
+# IDE
+.vscode/
+
+# Node Artifacts
+default.node.yaml
+example_robot_1.info.yaml

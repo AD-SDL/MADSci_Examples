@@ -1,13 +1,20 @@
 """Example Robot Node Implementation"""
 
-from madsci.common.types.node_types import RestNodeConfig
-from madsci.node_module.rest_node_module import RestNode
-from madsci.common.types.node_types import NodeDefinition, NodeType
 from typing import Optional
-from example_robot_interface import ExampleRobotInterface
+
+from madsci.common.types.action_types import (
+    ActionFailed,
+    ActionResult,
+    ActionSucceeded,
+)
+from madsci.common.types.node_types import (
+    RestNodeConfig,
+)
 from madsci.node_module.helpers import action
-from madsci.common.types.action_types import ActionResult, ActionSucceeded, ActionRequest, ActionFailed
-from madsci.common.types.node_types import NodeStatus
+from madsci.node_module.rest_node_module import RestNode
+
+from example_robot_interface import ExampleRobotInterface
+
 
 class ExampleRobotConfig(RestNodeConfig):
     """Example Configuration options for our ExampleRobotNode."""
@@ -15,10 +22,11 @@ class ExampleRobotConfig(RestNodeConfig):
     robot_number: int = 0
     """An identifier for the robot we are controlling."""
 
+
 class ExampleRobotNode(RestNode):
     """Define an Example Robot Node, with the full implementation from the node_notebook."""
 
-    config_model = ExampleRobotConfig
+    config: ExampleRobotConfig = ExampleRobotConfig()
     """The configuration model for the node."""
     robot_interface: Optional[ExampleRobotInterface] = None
     """The robot interface for controlling the robot."""
@@ -31,7 +39,9 @@ class ExampleRobotNode(RestNode):
         """Handle the startup of the node."""
         self.logger.log_info(f"Connecting to robot {self.config.robot_number}...")
         self.robot_interface = ExampleRobotInterface(self.config.robot_number)
-        self.logger.log_info(f"Connected to robot {self.robot_interface.get_robot_number()}")
+        self.logger.log_info(
+            f"Connected to robot {self.robot_interface.get_robot_number()}"
+        )
 
     def shutdown_handler(self) -> None:
         """Handle the shutdown of the node."""
@@ -55,7 +65,9 @@ class ExampleRobotNode(RestNode):
         else:
             self.node_status.busy = len(self.node_status.running_actions) > 0
 
-    @action(name="move_joints", description="Move the robot to the specified joint angles")
+    @action(
+        name="move_joints", description="Move the robot to the specified joint angles"
+    )
     def move_joints(self, joint_angles: list[float]) -> ActionResult:
         """
         An example action: moving the robot to a set of joint angles.
@@ -72,6 +84,7 @@ class ExampleRobotNode(RestNode):
         self.robot_interface.move_to_joint_angles(joint_angles)
         self.logger.log_info(f"Moved robot to joint angles: {joint_angles}")
         return ActionSucceeded()
+
 
 if __name__ == "__main__":
     example_node = ExampleRobotNode()

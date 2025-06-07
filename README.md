@@ -12,4 +12,3 @@ You can run these notebooks in the following ways:
 
 - [Node Notebook](./node_notebook.ipynb): walks through using MADSci's Node standard to automate and integrate your devices into an automated or autonomous laboratory.
 - [Experiment Notebook](./experiment_notebook.ipynb): walks through writing your own autonomous experiment using MADSci's Experiment Application (note: this notebook assumes that you have a running MADSci lab)
-
