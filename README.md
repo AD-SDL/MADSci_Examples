@@ -1,5 +1,7 @@
 # MADSci Examples
 
+**Note**: This repository has been archived, and the examples are now included in the main MADSci repository.
+
 This repository provides example notebooks to teach the core concepts behind [the Modular Autonomous Discovery for Science (MADSci) Framework](https://github.com/AD-SDL/MADSci).
 
 You can run these notebooks in the following ways:
